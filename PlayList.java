@@ -68,7 +68,7 @@ class PlayList {
     public int totalDuration() {
         int totalDuration = 0;
         for (int i = 0; i < size ; i++){
-            totalDuration =+ tracks[i].getDuration();
+            totalDuration = totalDuration + tracks[i].getDuration();
         }
         return totalDuration;
     }
@@ -92,11 +92,11 @@ class PlayList {
      *  returns true. */
     public boolean add(int i, Track track) {
         if (i>=0 && i<(size-1) && size < maxSize){
-            for (int j = i+1; j < size -1; j++){
-                tracks[j] = tracks [j+1];
+            for (int j = size-1; j > i; j--){
+                tracks[j+1] = tracks [j];
             }
             tracks[i] = track; 
-            size++;
+            this.size++;
             return true; 
         }
         return false;
