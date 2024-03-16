@@ -91,8 +91,8 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        if (i>=0 && size < maxSize){
-            for (int j = size-1; j > i; j--){
+        if (i>=0 && size < maxSize && i < maxSize){
+            for (int j = size-1; j >= i; j--){
                 tracks[j+1] = tracks [j];
             }
             tracks[i] = track; 
@@ -170,13 +170,11 @@ class PlayList {
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */
     public String titleOfShortestTrack() {
-        if (this.size == 0){
-            return null;
-        }
-        else{
+        if (this.size > 0 ){
             int index = minIndex(0);
             return tracks[index].getTitle();
         }
+        return null;
     }
 
     /** Sorts this list by increasing duration order: Tracks with shorter
@@ -186,12 +184,14 @@ class PlayList {
     public void sortedInPlace() {
         // Uses the selection sort algorithm,  
         // calling the minIndex method in each iteration.
-        for (int i = 0; i < size; i++){
-            int minIndex = minIndex(i);
-            Track minDuration = this.tracks[minIndex];
-            Track temp = this.tracks[i];
-            this.tracks[i] = minDuration;
-            this.tracks[minIndex] = temp; 
+        if (this.size > 0){
+            for (int i = 0; i < size; i++){
+                int minIndex = minIndex(i);
+                Track minDuration = this.tracks[minIndex];
+                Track temp = this.tracks[i];
+                this.tracks[i] = minDuration;
+                this.tracks[minIndex] = temp; 
+            }
         }
         //// replace this statement with your code
     }
