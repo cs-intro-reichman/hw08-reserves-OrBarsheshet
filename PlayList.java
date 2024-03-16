@@ -40,6 +40,7 @@ class PlayList {
         }
         else{ 
             this.tracks[size] = track; 
+            this.size++; 
         }
         return true;
     }
@@ -59,7 +60,7 @@ class PlayList {
      public void removeLast() {
         if (size != 0){
             tracks[size-1] = null;
-            size--;
+            this.size--;
         }
     }
     
@@ -110,7 +111,7 @@ class PlayList {
             for (int j = i+1; j < size-1 ; j++){
                 tracks[j-1] = tracks [j]; 
             }
-            size--;
+            this.size--;
         }
     }
 
