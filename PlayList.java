@@ -173,13 +173,18 @@ class PlayList {
 
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */
+    // public String titleOfShortestTrack() {
+    //     if (this.size > 0 ){
+    //         int index = minIndex(0);
+    //         return tracks[index].getTitle();
+    //     }
+    //     return null;
+    // }
     public String titleOfShortestTrack() {
-        if (this.size > 0 ){
-            int index = minIndex(0);
-            return tracks[index].getTitle();
-        }
-        return null;
+        if (this.size == 0) return null;
+        return tracks[minIndex(0)].getTitle();
     }
+
 
     /** Sorts this list by increasing duration order: Tracks with shorter
      *  durations will appear first. The sort is done in-place. In other words,
@@ -188,15 +193,12 @@ class PlayList {
     public void sortedInPlace() {
         // Uses the selection sort algorithm,  
         // calling the minIndex method in each iteration.
-        if (this.size > 0){
-            for (int i = 0; i < size; i++){
-                int minIndex = minIndex(i);
-                Track minDuration = this.tracks[minIndex];
-                Track temp = this.tracks[i];
-                this.tracks[i] = minDuration;
-                this.tracks[minIndex] = temp; 
-            }
-        }
-        //// replace this statement with your code
+        for (int i = 0; i < this.size; i++) {
+            int minIndex = minIndex(i);
+            Track minDuration = this.tracks[minIndex];
+            Track temp = this.tracks[i]; // new Track(this.tracks[i].getTitle(), this.tracks[i].getArtist(), this.tracks[i].getDuration());
+            this.tracks[i] = minDuration;
+            this.tracks[minIndex] = temp;
+        } 
     }
 }
