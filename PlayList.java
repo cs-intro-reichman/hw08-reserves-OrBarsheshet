@@ -157,16 +157,26 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        int minIndex = tracks[start].getDuration();
-        int index = start;
-        if (start>0 && start < size-1){
-            for (int i = start+1 ; i < size ; i++){
-                if (tracks[i].getDuration()<minIndex){
-                    minIndex =  tracks[i].getDuration();
-                    index = i; 
+        // int minIndex = tracks[start].getDuration();
+        // int index = start;
+        // if (start>0 && start < size-1){
+        //     for (int i = start+1 ; i < size ; i++){
+        //         if (tracks[i].getDuration()<minIndex){
+        //             minIndex =  tracks[i].getDuration();
+        //             index = i; 
+        //         }
+        //     }
+        //     return index;
+        // }
+        // return -1;
+        if (start >= 0 && start < size) {
+            int minIndex = start;
+            for (int i = start + 1; i < size; i++) {
+                if (tracks[i].getDuration() < tracks[minIndex].getDuration()) {
+                    minIndex = i;
                 }
             }
-            return index;
+            return minIndex;
         }
         return -1;
     }
@@ -182,11 +192,12 @@ class PlayList {
     // }
     public String titleOfShortestTrack() {
         if (this.size > 0){
-            return tracks[minIndex(0)].getTitle();
-        }
-        else {
-            return null; 
+            int index = minIndex(0);
+            if (index != -1){
+            return tracks[index].getTitle();
             }
+        }
+          return null;
     }
 
 
