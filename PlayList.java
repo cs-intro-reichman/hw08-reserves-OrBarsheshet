@@ -170,8 +170,13 @@ class PlayList {
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */
     public String titleOfShortestTrack() {
-        if (this.size == 0) return null;
-        else return tracks[minIndex(0)].getTitle();
+        if (this.size == 0){
+            return null;
+        }
+        else{
+            int index = minIndex(0);
+            return tracks[index].getTitle();
+        }
     }
 
     /** Sorts this list by increasing duration order: Tracks with shorter
