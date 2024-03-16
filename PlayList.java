@@ -184,15 +184,12 @@ class PlayList {
     public void sortedInPlace() {
         // Uses the selection sort algorithm,  
         // calling the minIndex method in each iteration.
-        if (this.size > 0){
-            for (int i = 0; i < size; i++){
-                int minIndex = minIndex(i);
-                Track minDuration = this.tracks[minIndex];
-                Track temp = this.tracks[i];
-                this.tracks[i] = minDuration;
-                this.tracks[minIndex] = temp; 
-            }
+            int index;
+        for(int j = 0; j < size; j++){
+            index = minIndex(j);
+            add(j, tracks[index]);
+            remove(index + 1);
         }
-        //// replace this statement with your code
-    }
+        }
+        //// replace this statement with your code   
 }
