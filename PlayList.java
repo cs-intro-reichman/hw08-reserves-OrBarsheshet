@@ -41,8 +41,8 @@ class PlayList {
         else{ 
             this.tracks[size] = track; 
             this.size++; 
+            return true;
         }
-        return true;
     }
 
     /** Returns the data of this list, as a string. Each track appears in a separate line. */
@@ -91,32 +91,29 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        if (size == 0 || i == this.size){
-            this.add(track);
+        if (i < 0 || i > this.size || this.size == this.maxSize) return false; // If i is negative or greater than the size of this list, or if the list is full, does nothing and returns false.
+        if (this.size == 0 || i == this.size) { // If list is empty or if user wants to add track to the end of the list
+            this.add(track); 
             return true;
         }
-        if (i >= 0 && size < maxSize && i < maxSize){
-            for (int j = size-1; j >= i; j--){
-                tracks[j+1] = tracks [j];
-            }
-            tracks[i] = track; 
-            this.size++;
-            return true; 
+        for (int j = this.size - 1; j >= i; j--) {
+            this.tracks[j+1] = this.tracks[j];
         }
-        return false;
+        this.tracks[i] = track;
+        size++;
+        return true;
     }
      
     /** Removes the track in the given index from this list.
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        if ( size > 0 && i > 0 && i < maxSize-1){
-            tracks[i] = null;
-            for (int j = i+1; j < size-1 ; j++){
-                tracks[j-1] = tracks [j]; 
-            }
-            this.size--;
+        if (this.size == 0 || i < 0 || i >= this.size) return;
+        for (int j = i; j < this.size - 1; j++) {
+            this.tracks[j] = this.tracks[j+1];
         }
+        tracks[this.size-1] = null;
+        size--;
     }
 
     /** Removes the first track that has the given title from this list.
@@ -149,6 +146,7 @@ class PlayList {
                 }
             }
         }
+        else return;
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
