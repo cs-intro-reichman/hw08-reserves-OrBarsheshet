@@ -191,14 +191,25 @@ class PlayList {
      *  rather than returning a new, sorted playlist, the method sorts
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
-        // Uses the selection sort algorithm,  
-        // calling the minIndex method in each iteration.
-        for (int i = 0; i < this.size; i++) {
-            int minIndex = minIndex(i);
-            Track minDuration = this.tracks[minIndex];
-            Track temp = this.tracks[i]; // new Track(this.tracks[i].getTitle(), this.tracks[i].getArtist(), this.tracks[i].getDuration());
-            this.tracks[i] = minDuration;
-            this.tracks[minIndex] = temp;
+        // // Uses the selection sort algorithm,  
+        // // calling the minIndex method in each iteration.
+        // for (int i = 0; i < this.size; i++) {
+        //     int minIndex = minIndex(i);
+        //     Track minDuration = this.tracks[minIndex];
+        //     Track temp = this.tracks[i]; // new Track(this.tracks[i].getTitle(), this.tracks[i].getArtist(), this.tracks[i].getDuration());
+        //     this.tracks[i] = minDuration;
+        //     this.tracks[minIndex] = temp;
+        // } 
+        for (int i = 0; i < size - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (tracks[j].getDuration() < tracks[minIndex].getDuration()) {
+                    minIndex = j;
+                }
+            }
+            Track temp = tracks[minIndex];
+            tracks[minIndex] = tracks[i];
+            tracks[i] = temp;
         } 
     }
 }
