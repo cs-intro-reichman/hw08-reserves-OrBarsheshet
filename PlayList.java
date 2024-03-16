@@ -181,8 +181,11 @@ class PlayList {
     //     return null;
     // }
     public String titleOfShortestTrack() {
-        if (this.size == 0) return null;
-        return tracks[minIndex(0)].getTitle();
+        if (this.size > 0){
+            return tracks[minIndex(0)].getTitle();
+        else{
+            return null; 
+            }
     }
 
 
