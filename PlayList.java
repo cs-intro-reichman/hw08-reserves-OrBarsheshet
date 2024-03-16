@@ -139,12 +139,16 @@ class PlayList {
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
      public void add(PlayList other) {
-       if(( this.size + other.size ) <= maxSize){
-        for (int i = 0; i < other.size; i++) {
-            this.add(other.tracks[i]);
+        if((this.size + other.size) <= maxSize){
+            for (int i = 0; i < other.size; i++){
+                if (this.size < maxSize) {
+                    tracks[this.size] = other.tracks[i];
+                    this.size++;
+                } else {
+                    break; // Exit the loop if the playlist is full
+                }
+            }
         }
-
-       }
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
