@@ -91,7 +91,11 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        if (i>=0 && size < maxSize && i < maxSize){
+        if (size == 0 || i == this.size){
+            this.add(track);
+            return true;
+        }
+        if (i >= 0 && size < maxSize && i < maxSize){
             for (int j = size-1; j >= i; j--){
                 tracks[j+1] = tracks [j];
             }
@@ -182,12 +186,17 @@ class PlayList {
      *  rather than returning a new, sorted playlist, the method sorts
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
-            int index;
-            for(int j = 0; j < size; j++){
-                index = minIndex(j);
-                add(j, tracks[index]);
-                remove(index + 1);
+        // Uses the selection sort algorithm,  
+        // calling the minIndex method in each iteration.
+        if (this.size > 0){
+            for (int i = 0; i < size; i++){
+                int minIndex = minIndex(i);
+                Track minDuration = this.tracks[minIndex];
+                Track temp = this.tracks[i];
+                this.tracks[i] = minDuration;
+                this.tracks[minIndex] = temp; 
             }
+        }
+        //// replace this statement with your code
     }
-        //// replace this statement with your code   
 }
